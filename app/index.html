@@ -1,0 +1,126 @@
+<!doctype html>
+<html ng-app="AppForGlow">
+<head>
+  <meta charset="utf-8">
+  <title>User Details Form</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+
+
+  <link rel="stylesheet" href="styles/main.css">
+  <!-- endbuild -->
+</head>
+<body>
+<!--[if lte IE 8]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+  your browser</a> to improve your experience.</p>
+<![endif]-->
+
+
+<div class="container">
+
+  <div>
+    <h2 class="text-center">User Details Form</h2>
+
+    <form name="userDetailsForm" ng-controller="formCtrl" class="form-horizontal" role="form" novalidate>
+
+      <div class="form-group"
+           ng-class="{ 'has-error': userDetailsForm.uFullName.$touched && userDetailsForm.uFullName.$invalid }">
+        <label class="control-label col-sm-3" for="fname">Full Name</label>
+
+        <div class="col-sm-9">
+          <input type="text" name="uFullName" class="form-control" id="fname" placeholder="Full Name"
+                 ng-model="userDetails.fullName"
+                 ng-maxlength="10"
+                 required
+            />
+
+          <div class="help-block" ng-messages="userDetailsForm.uFullName.$error"
+               ng-if="userDetailsForm.uFullName.$touched">
+            <p ng-message="maxlength">Max Length allowed is 100 characters</p>
+
+            <p ng-message="required">Please enter you Full Name</p>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="form-group"
+           ng-class="{ 'has-error': userDetailsForm.uDob.$touched && userDetailsForm.uDob.$invalid }">
+        <label class="control-label col-sm-3" for="dob">Date of Birth</label>
+
+        <div class="col-sm-9">
+          <input type="date" name="uDob" class="form-control" id="dob"
+                 ng-model="userDetails.dob"
+                 required
+                 max="{{currentDate}}"
+            />
+
+          <div class="help-block" ng-messages="userDetailsForm.uDob.$error" ng-if="userDetailsForm.uDob.$touched">
+            <p ng-message="required">Please select your Date of Birth</p>
+
+            <p ng-message="max">Date of Birth cannot be a future date</p>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label class="control-label col-sm-3">Sex</label>
+
+        <div class="col-sm-9">
+          <div class="radio">
+            <label>
+              <input type="radio" ng-model="userDetails.sex" id="sexMale" value="male" ng-required="true">
+              Male
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" ng-model="userDetails.sex" id="sexFemale" value="famale" ng-required="true">
+              Female
+            </label>
+          </div>
+
+        </div>
+
+
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" ng-click="saveUserForm(userDetails, userDetailsForm)" class="btn btn-default" ng-disabled="userDetailsForm.$invalid">Submit</button>
+          <button type="button" ng-click="resetUserForm(userDetailsForm)" class="btn btn-default">Reset</button>
+          <div id="messages" class="alert alert-success" data-ng-show="showMsg" data-ng-bind="messages"></div>
+        </div>
+      </div>
+
+
+    </form>
+
+  </div>
+</div>
+
+
+<!-- build:js(.) scripts/vendor.js -->
+<!-- bower:js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
+<script src="bower_components/angular-messages/angular-messages.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-touch/angular-touch.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
+
+<!-- build:js({.tmp,app}) scripts/scripts.js -->
+<script src="scripts/app.js"></script>
+<script src="scripts/controllers/main.js"></script>
+<script src="scripts/services/services.js"></script>
+
+<!-- endbuild -->
+</body>
+</html>
